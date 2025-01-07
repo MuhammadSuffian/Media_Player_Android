@@ -20,5 +20,17 @@ public class MainActivity extends AppCompatActivity {
         void initlization(){
             binding=ActivityMainBinding.inflate(getLayoutInflater());
             setContentView(binding.getRoot());
+            buttonsLogic();
+        }
+        void buttonsLogic(){
+        binding.btnPlay.setOnClickListener(v->{
+
+        });
+        binding.btnPlay.setOnClickListener(v->{
+
+            });
+        binding.btnPlay.setOnClickListener(v->{
+
+            });
         }
 }
