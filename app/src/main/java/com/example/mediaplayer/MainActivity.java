@@ -6,6 +6,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.mediaplayer.databinding.ActivityMainBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -35,24 +37,31 @@ public class MainActivity extends AppCompatActivity {
         void buttonsLogic(){
         binding.btnPlay.setOnClickListener(v->{
             mediaplayer.start();
+            Snackbar.make(v,"Playing",Snackbar.LENGTH_SHORT).show();
         });
         binding.btnPause.setOnClickListener(v->{
             mediaplayer.pause();
-            });
+            Snackbar.make(v,"Pause",Snackbar.LENGTH_SHORT).show();
+
+        });
         binding.btnStop.setOnClickListener(v->{
             mediaplayer.stop();
             mediaplayer.reset();
             initMusic();
-            });
+            Snackbar.make(v,"Stop",Snackbar.LENGTH_SHORT).show();
+
+        });
         }
         void initMusic(){
-            String offlinemusic="android.resourse://"+getPackageName()+"/"+R.raw.baby_cry;
+            String offlinemusic="android.resource://"+getPackageName()+"/"+R.raw.baby_cry;
             Uri uri=Uri.parse(offlinemusic);
             try{
                 mediaplayer.setDataSource(this,uri);
+                mediaplayer.prepare();
             }
             catch (Exception e){
                 e.printStackTrace();
+                Log.e("Error",e.getMessage());
             }
         }
 }
